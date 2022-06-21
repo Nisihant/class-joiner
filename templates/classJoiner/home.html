@@ -1,0 +1,256 @@
+{% extends 'classJoiner/base.html' %}
+{% load static %}
+
+{% block title %}{{title}}{% endblock %}
+
+
+{% block css %}
+
+<style>
+    #accordion1 {
+        padding: 10px;
+        border-radius: 5px;
+        background: #b1cbbb;
+    }
+
+    #link:onhover {
+        color: azure;
+    }
+
+    #link {
+        transition: all .0s linear;
+    }
+
+    .myContainer
+    {
+        flex-wrap: nowrap;
+    }
+</style>
+{%endblock%}
+
+
+
+{% block body%}
+<div class="page-content bg-white">
+    <!--Team--->
+    <div class="section-full content-inner-2 bg-img-fix  wow fadeIn" data-wow-duration="2s" data-wow-delay="0.8s">
+
+        <div class="container outer-card mt-5">
+
+            <div class="group-box">
+
+                <div class="section-head text-center">
+                    <h2 class="title">Class Joiner</h2>
+                    <p>You can join your class from here and can also send class link in any whatsapp group.</p>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 mx-2 my-2 card-left">
+                            <aside class="side-bar shop-categories ">
+                                <div class="widget recent-posts-entry ">
+                                    <div class="dlab-accordion advanced-search toggle" id="accordion1">
+                                        <div class="panel">
+                                            <div class="acod-head">
+                                                <h5 class="acod-title">
+                                                    <a data-toggle="collapse" href="#categories"
+                                                        style="color: #50394c;">
+                                                        GROUP
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="categories" class="acod-body collapse show ">
+                                                <div class="acod-content">
+                                                    <div class="widget widget_services">
+
+                                                        <input class="form-check-input" type="radio" name="group"
+                                                            value="G1" id="G1" checked onclick="getclass()">
+                                                        <label class="form-check-label mt-3" for="G1"
+                                                            style="color: #50394c;">
+                                                            G1
+                                                        </label>
+
+                                                        <input class="form-check-input" type="radio" name="group"
+                                                            value="G2" id="G2" onclick="getclass()">
+                                                        <label class="form-check-label  mt-3" for="G2"
+                                                            style="color: #50394c;">
+                                                            G2
+                                                        </label>
+
+                                                        <input class="form-check-input" type="radio" name="group"
+                                                            value="G3" id="G3" onclick="getclass()">
+                                                        <label class="form-check-label  mt-3" for="G3"
+                                                            style="color: #50394c;">
+                                                            G3
+                                                        </label>
+
+                                                        <input class="form-check-input" type="radio" name="group"
+                                                            value="G4" id="G4" onclick="getclass()">
+                                                        <label class="form-check-label  mt-3" for="G4"
+                                                            style="color: #50394c;">
+                                                            G4
+                                                        </label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+
+                        <div class=" col-md-9 mx-2 my-2 ">
+                            <div class="card text-center">
+                                <div class="card-header" style="background: #b1cbbb;">
+                                    <div class="row myContainer">
+                                        <div class="col-md-4 text-left" id="showday" style="color: #50394c;"></div>
+                                        <div class="col-md-4" id="showdate" style="color: #50394c;"></div>
+                                        <div class="col-md-4 text-right" id="showtime" style="color: #50394c;"></div>
+                                    </div>
+                                    <div class="dlab-divider divider-4px bg-gray-dark"><i class="icon-dot c-square"></i>
+                                    </div>
+                                    <div class="card-body card-right-2">
+                                        <h2 class="card-title" id="subject" style="color: #50394c;"></h2>
+
+                                        <div class="row mt-3 myContainer">
+                                            <div class="col-md-6 text-left">
+                                                <h5 class="card-title" id="group" style="color: #50394c;"></h5>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <h5 class="card-title" id="teacher" style="color: #50394c;"></h5>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 row myContainer">
+
+                                <div class="col-md-6 text-left">
+                                    <a class="site-button button-md radius-no outline outline-2"
+                                        href="javascript:void(0);" id="link" data-toggle="tooltip" data-placement="bottom" title="Join Class Through Link">
+                                        Join
+                                    </a>
+                                </div>
+
+                                <div class="col-md-6 text-right">
+                                    <button class="site-button button-md radius-no outline outline-2"
+                                        onclick="sendMessage(true)" data-toggle="tooltip" data-placement="bottom" title="Whatsapp Friends About Class">Message</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--Team End--->
+</div>
+{%endblock%}
+
+
+{% block script %}
+<script src="{%static 'js/ace/ace.js'%}"></script>
+
+<script>
+    setInterval(() => {
+        const d = new Date();
+        const day = ["sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = {
+            0: 'Jan',
+            1: 'Feb',
+            2: 'Mar',
+            3: 'Apr',
+            4: 'May',
+            5: 'Jun',
+            6: 'Jul',
+            7: 'Aug',
+            8: 'Sep',
+            9: 'Oct',
+            10: 'Nov',
+            11: 'Dec'
+        }
+        let hour = d.getHours();
+
+        if (hour < 10)
+            hour = "0" + hour;
+
+
+        let minute = d.getMinutes();
+
+        if (minute < 10)
+            minute = "0" + minute;
+
+        let sec = d.getSeconds();
+
+        if (sec < 10)
+            sec = "0" + sec;
+
+        if (minute == 30 && sec == 0)
+            getclass()
+
+        if (minute == 30 && sec == 0 && (d.getHours() >= 8 && d.getHours() <= 16))
+            sendMessage(false);
+
+        let time = hour + ":" + minute;
+        document.getElementById("showday").innerHTML = day[d.getDay()].substr(0,3);
+        document.getElementById("showtime").innerHTML = time;
+        document.getElementById("showdate").innerHTML = d.getDate() + ", " + months[d.getMonth()];
+    }, 1000);
+
+    $(document).ready(function () {
+        $('#G1').click();
+    });
+
+    function getgroup() {
+        group = $('input[name="group"]:checked').val();
+        return group;
+    }
+
+    function getclass() {
+        const d = new Date();
+        let start = 8 * 60 + 30;
+        let pd = ((d.getHours() * 60 + d.getMinutes()) - start) / 60;
+        const day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+        const url = "{%url 'getclasses'%}";
+        $.post(url, {
+            "group": getgroup(),
+            "day": day[d.getDay()],
+            "period": pd,
+            csrfmiddlewaretoken: '{{csrf_token}}',
+        }, function (data, status) {
+            data = JSON.parse(data)
+
+            document.getElementById("group").innerText = "Group: " + getgroup();
+            document.getElementById("teacher").innerText = data['teacher'];
+            document.getElementById("subject").innerText = data['subject'];
+            $("#link")[0].href = data['link'];
+        })
+    }
+
+    function sendMessage(flag) {
+        const d = new Date();
+        let start = 8 * 60 + 30;
+        let pd = ((d.getHours() * 60 + d.getMinutes()) - start) / 60;
+        const day = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+        const url = "{%url 'sendMessage'%}";
+        $.post(url, {
+            "day": day[d.getDay()],
+            "period": pd,
+            csrfmiddlewaretoken: '{{csrf_token}}',
+        }, function (data, status) {
+            data = JSON.parse(data)
+            if(flag)
+                alert(data["status"])
+        })
+    }
+</script>
+
+
+{%endblock%}

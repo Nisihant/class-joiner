@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+    <meta name="description" content="ML-TOOLBOX" />
+    <meta property="og:title" content="ML-TOOLBOX" />
+    <meta property="og:description" content="ML-TOOLBOX" />
+    <meta property="og:image" content="" />
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON -->
+    <link rel="icon" href="{%static 'images/favicon.ico'%}" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="{%static 'images/favicon.png'%}" />
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <!-- PAGE TITLE HERE -->
+    <!-- here heading will come -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- MOBILE SPECIFIC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" type="text/css" href="{%static 'css/plugins.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/style.min.css'%}">
+    <link class="skin" rel="stylesheet" type="text/css" href="{%static 'css/skin/skin-2.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/templete.min.css'%}">
+    <!-- Google Font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Playfair+Display:400,400i,700,700i,900,900i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+    </style>
+
+    <!-- REVOLUTION SLIDER CSS -->
+    <link rel="stylesheet" type="text/css" href="{%static 'plugins/revolution/revolution/css/revolution.min.css'%}">
+
+    <!-- here css will come -->
+    {% block css %}{% endblock %}
+</head>
+
+<body id="bg">
+    <div class="page-wraper">
+        <div id="loading-area"></div>
+
+        <!-- header -->
+        <header class="site-header mo-left header-transparent header navstyle3">
+            <!-- main header -->
+            <div class="main-bar-wraper navbar-expand-lg is-fixed">
+                <div class="main-bar clearfix ">
+                    <div class="container clearfix">
+                        <!-- website logo -->
+                        <div class="logo-header mostion logo-white">
+                            <a href="{%url 'classJoiner'%}"><img src="{%static '/images/logo.png'%}" alt=""></a>
+                        </div>
+                        <!-- nav toggle button -->
+                        <button class="navbar-toggler collapsed navicon justify-content-end" type="button"
+                            data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+
+                        {%if user.is_authenticated%}
+                        <div class="extra-nav">
+                            <div class="extra-cell">
+                                <div class="shop-cart navbar-right">
+                                    <button type="button" class="site-button-link cart-btn">
+                                        <i class="la la-user"></i>
+                                    </button>
+                                    <ul class="dropdown-menu cart-list">
+                                        <li class="cart-item">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="javascript:void(0);">
+                                                        <img alt="" class="media-object"
+                                                            src="{%static 'images/projects/accounts/user.png'%}">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h6><a href="javascript:void(0);" class="media-heading">{{user.username}}</a>
+                                                    </h6>
+                                                    <span>{{user.email}}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="text-center">
+                                            <a class="site-button radius-xl m-r5" href="{%url 'logout'%}">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {%endif%}
+
+                        <!-- main nav -->
+                        <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                            <div class="logo-header d-md-block d-lg-none">
+                                <a href="{%url 'classJoiner'%}"><img src="{%static '/images/logo.png'%}" alt=""></a>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li> <a href="{%url 'classJoiner'%}">Home</a></li>
+                                <li> <a href="{%url 'classJoiner'%}">About Me</a></li>
+                                <li> <a href="{%url 'classJoiner'%}">Contact</a></li>
+                                <!-- <li onmouseover="all_ml_projects()">
+                                    <a href="javascript:void(0);">ML Box<i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu right" id="ml_box"
+                                        style="max-height: 400px; overflow-y: scroll;">
+                                    </ul>
+                                </li> -->
+
+                                <!-- <li onmouseover="all_tool_projects()">
+                                    <a href="javascript:void(0);">Tool Box<i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu right" id="tool_box"
+                                        style="max-height: 400px; overflow-y: scroll;">
+                                    </ul>
+                                </li> -->
+
+                             
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header -->
+
+
+        {% block body %}{% endblock %}
+
+        <!-- footer -->
+        <footer class="site-footer footer-full">
+            <div class="p-tb60 bg-black">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-md-left text-center footer-logo">
+                            <img src="{%static 'images/logo.png'%}" alt="" width="100">
+                            <p class="m-b0 m-t10">Copyright © 2021-23</p>
+                        </div>
+                        <div class="col-md-6 text-md-right text-center">
+                            <div class="widget-link ">
+                                <ul>
+                                    <li><a href="{%url 'classJoiner'%}">Home</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer -->
+
+
+        <!-- scroll top button -->
+        <button class="scroltop fa fa-chevron-up"></button>
+    </div>
+    <!-- JAVASCRIPT FILES ========================================= -->
+    <script src="{%static 'js/jquery.min.js'%}"></script><!-- JQUERY.MIN JS -->
+    <script src="{%static 'plugins/wow/wow.js'%}"></script><!-- WOW JS -->
+    <script src="{%static 'plugins/bootstrap/js/popper.min.js'%}"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="{%static 'plugins/bootstrap/js/bootstrap.min.js'%}"></script><!-- BOOTSTRAP.MIN JS -->
+    <script src="{%static 'plugins/bootstrap-select/bootstrap-select.min.js'%}"></script><!-- FORM JS -->
+    <script src="{%static 'plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js'%}"></script><!-- FORM JS -->
+    <script src="{%static 'plugins/magnific-popup/magnific-popup.js'%}"></script><!-- MAGNIFIC POPUP JS -->
+    <script src="{%static 'plugins/counter/waypoints-min.js'%}"></script><!-- WAYPOINTS JS -->
+    <script src="{%static 'plugins/counter/counterup.min.js'%}"></script><!-- COUNTERUP JS -->
+    <script src="{%static 'plugins/imagesloaded/imagesloaded.js' %}"></script><!-- IMAGESLOADED -->
+    <script src="{%static 'plugins/masonry/masonry-3.1.4.js' %}"></script><!-- MASONRY -->
+    <script src="{%static 'plugins/masonry/masonry.filter.js' %}"></script><!-- MASONRY -->
+    <script src="{%static 'plugins/owl-carousel/owl.carousel.js' %}"></script><!-- OWL SLIDER -->
+    <script src="{%static 'plugins/lightgallery/js/lightgallery-all.min.js' %}"></script><!-- Lightgallery -->
+    <script src="{%static 'js/custom.js' %}"></script><!-- CUSTOM FUCTIONS  -->
+    <script src="{%static 'js/dz.carousel.min.js' %}"></script><!-- SORTCODE FUCTIONS  -->
+    <script src="{%static 'plugins/countdown/jquery.countdown.js' %}"></script><!-- COUNTDOWN FUCTIONS  -->
+    <script src="{%static 'js/dz.ajax.js' %}"></script><!-- CONTACT JS  -->
+    <script src="{%static 'plugins/rangeslider/rangeslider.js' %}"></script><!-- Rangeslider -->
+
+    <script src="{%static 'js/jquery.lazy.min.js' %}"></script>
+    <!-- REVOLUTION JS FILES -->
+    <script src="{%static 'plugins/revolution/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+    <script src="{%static 'plugins/revolution/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+    <!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.actions.min.js' %}">
+    </script>
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.carousel.min.js' %}">
+    </script>
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.kenburn.min.js' %}">
+    </script>
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.layeranimation.min.js' %}">
+    </script>
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.navigation.min.js' %}">
+    </script>
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.parallax.min.js' %}">
+    </script>
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.slideanims.min.js' %}">
+    </script>
+    <script src="{%static 'plugins/revolution/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
+    <script src="{%static 'js/rev.slider.js' %}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            'use strict';
+            dz_rev_slider_5();
+            $('.lazy').Lazy();
+        }); /*ready*/
+    </script>
+    <script src="{%static 'common/option_retriever.js' %}"></script>
+    {% block script %} {% endblock %}
+</body>
+
+</html>
