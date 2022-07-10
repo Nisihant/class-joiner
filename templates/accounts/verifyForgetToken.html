@@ -1,0 +1,109 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block title %}{{title}}{% endblock %}
+
+
+{% block css %}
+{%endblock%}
+
+
+{% block body%}
+<!-- Content -->
+<div class="page-content bg-white">
+    <!-- contact area -->
+    <div class="section-full content-inner shop-account">
+        <!-- Product -->
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="font-weight-700 m-t0 m-b40">RESET PASSWORD</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 m-b30">
+                    <div class="p-a30 border-1  max-w500 m-auto">
+                        <div class="tab-content">
+                            <form id="login" class="tab-pane active" onsubmit="return false;">
+                                <h4 class="font-weight-700">NEW PASSWORD</h4>
+                                <p class="font-weight-600">Enter Your New Password .</p>
+                                <div class="form-group">
+                                    <label class="font-weight-700">PASSWORD *</label>
+                                    <input id="password" required="" class="form-control"
+                                        placeholder="Enter New Password" type="password">
+                                </div>
+
+                                <div class="text-center m-t15" id="save">
+                                    <button class="site-button button-lg radius-no outline outline-2"
+                                        onclick="resetPassword()">Reset
+                                    </button>
+                                </div>
+
+                                <div class="text-center m-t15" id="saving" style="display: none;">
+                                    <button class="site-button button-lg radius-no" onclick="return false;">
+                                        <div class="spinner-border text-white" role="status">
+                                            <span class="sr-only">Creating...</span>
+                                        </div>
+                                    </button>
+                                </div>
+
+                            </form>
+
+                            <div class="alert alert-danger mt-5 text-center role=" alert" id="error"
+                                style="display: none;">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product END -->
+    </div>
+</div>
+<!-- Content END-->
+{%endblock%}
+
+{% block script %}
+<script>
+    function resetPassword() {
+        $("#save")[0].style.display = "none";
+        $("#saving")[0].style.display = "block";
+
+        const url = window.location.href;
+
+        $.post(url, {
+            "password": $("#password")[0].value,
+            csrfmiddlewaretoken: '{{csrf_token}}',
+        }, function (data, status) {
+            $("#saving")[0].style.display = "none";
+            $("#save")[0].style.display = "block";
+
+            data = JSON.parse(data)
+
+            if (data["error"]) 
+            {
+                $("#error")[0].style.display = "block";
+                $("#error")[0].innerHTML = data["error"]
+
+                setTimeout(() => {
+                    $("#error")[0].style.display = "none";
+                }, 7000);
+            } else if (data["status"] == "success") {
+                window.location.href = "{%url 'login'%}";
+            }
+        }).fail(function () {
+            $("#saving")[0].style.display = "none";
+            $("#save")[0].style.display = "block";
+
+            $("#error")[0].style.display = "block";
+            $("#error")[0].innerHTML = "Some Error Occured Reloading The Window";
+
+            setTimeout(() => {
+                window.location.href = url;
+            }, 5000);
+        })
+
+    }
+</script>
+{%endblock%}

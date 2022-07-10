@@ -9,7 +9,7 @@ from class_joiner.settings import ACCOUNT_SID, AUTH_TOKEN
 
 def home(request):
     context = {
-        "title": "ML-TOOLBOX"
+        "title": "ClassJoiner"
     }
     return render(request, 'classJoiner/home.html', context)
 

@@ -57,8 +57,7 @@
             <div class="main-bar-wraper navbar-expand-lg is-fixed">
                 <div class="main-bar clearfix ">
                     <div class="container clearfix">
-                        <!-- website logo -->
-                        
+                       
                         <!-- nav toggle button -->
                         <button class="navbar-toggler collapsed navicon justify-content-end" type="button"
                             data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
@@ -67,54 +66,12 @@
                             <span></span>
                             <span></span>
                         </button>
-
-                        {%if user.is_authenticated%}
-                        <div class="extra-nav">
-                            <div class="extra-cell">
-                                <div class="shop-cart navbar-right">
-                                    <button type="button" class="site-button-link cart-btn">
-                                        <i class="la la-user"></i>
-                                    </button>
-                                    <ul class="dropdown-menu cart-list">
-                                        <li class="cart-item">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <a href="javascript:void(0);">
-                                                        <img alt="" class="media-object"
-                                                            src="{%static 'images/projects/accounts/user.png'%}">
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6><a href="javascript:void(0);" class="media-heading">{{user.username}}</a>
-                                                    </h6>
-                                                    <span>{{user.email}}</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="text-center">
-                                            <a class="site-button radius-xl m-r5" href="{%url 'logout'%}">Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        {%endif%}
-
                         <!-- main nav -->
                         <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
-                            
+                          
                             <ul class="nav navbar-nav">
-                              
-                                {%if not user.is_authenticated%}
-                                <li onmouseover="all_tool_projects()">
-                                    <a href="{%url 'accounts'%}">Register</a>
-                                </li>
-                                <li onmouseover="all_tool_projects()">
-                                    <a href="{%url 'login'%}">Login</a>
-                                </li>
-                                {%endif%}
-
-
+                                <li> <a href="{%url 'classJoiner'%}">Home</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -137,7 +94,7 @@
                         </div>
                         <div class="col-md-6 text-md-right text-center">
                             <div class="widget-link ">
-                              
+                                
                             </div>
                         </div>
                     </div>
@@ -145,7 +102,7 @@
             </div>
         </footer>
         <!-- footer -->
-
+        
 
         <!-- scroll top button -->
         <button class="scroltop fa fa-chevron-up"></button>
